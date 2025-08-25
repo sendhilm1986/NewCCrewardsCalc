@@ -58,8 +58,9 @@ class CashCalculator {
       const data = await this.sheetsAPI.fetchSheetData('Cash');
       return data.creditCards || [];
     } catch (error) {
-      console.error('Error loading category-specific cards:', error);
-      return [];
+      console.error('Error loading category-specific cards:', error.message);
+      // Return fallback data instead of throwing
+      return this.getFallbackCreditCards();
     }
   }
   getDefaultCards() {
@@ -545,6 +546,29 @@ class CashCalculator {
     pointsInput.addEventListener('keyup', calculateValue);
     
     pointsInput.focus();
+  }
+
+  getFallbackCreditCards() {
+    return [
+      { id: 'chase_sapphire_preferred', name: 'Sapphire Preferred', bank: 'Chase' },
+      { id: 'amex_gold', name: 'Gold Card', bank: 'American Express' },
+      { id: 'citi_double_cash', name: 'Double Cash', bank: 'Citi' }
+    ];
+  }
+
+  getFallbackRewardPrograms() {
+    return [
+      { 
+        id: 'program_1', 
+        name: 'Cash Back', 
+        pointName: 'Cash Back',
+        values: {
+          'chase_sapphire_preferred': 0.01,
+          'amex_gold': 0.01,
+          'citi_double_cash': 0.01
+        }
+      }
+    ];
   }
 }
 
