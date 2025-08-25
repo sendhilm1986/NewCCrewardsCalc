@@ -1,0 +1,154 @@
+<div class="container">
+  <!-- Step 1: Credit Card Selection -->
+  <div id="card-selection" class="step-section">
+    <div class="step-header">
+      <h2 class="step-title">Step 1: Select Your Credit Card</h2>
+      <p class="step-description">Choose your credit card program to see available redemption options</p>
+      
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input 
+            type="text" 
+            id="card-search" 
+            class="search-input" 
+            placeholder="Search credit cards..."
+            autocomplete="off"
+          />
+          <button id="clear-search" class="clear-search hidden">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-grid">
+      <!-- Cards will be dynamically populated -->
+    </div>
+    
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <span id="pagination-info-text">Loading cards...</span>
+      </div>
+      
+      <div class="pagination-controls">
+        <button id="prev-page" class="pagination-btn">← Previous</button>
+        <div class="page-numbers" id="page-numbers">
+          <!-- Page numbers will be dynamically populated -->
+        </div>
+        <button id="next-page" class="pagination-btn">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Reward Category Selection -->
+  <div id="category-selection" class="step-section hidden">
+    <div class="step-header">
+      <button id="back-to-cards" class="back-button">← Back to Cards</button>
+      <h2 class="step-title">Step 2: Choose Reward Category</h2>
+      <p class="step-description">Select how you'd like to redeem your points</p>
+    </div>
+
+    <div class="category-grid">
+      <div class="reward-category" data-category="airlines">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 640 640" fill="currentColor">
+            <path d="M552 264C582.9 264 608 289.1 608 320C608 350.9 582.9 376 552 376L424.7 376L265.5 549.6C259.4 556.2 250.9 560 241.9 560L198.2 560C187.3 560 179.6 549.3 183 538.9L237.3 376L137.6 376L84.8 442C81.8 445.8 77.2 448 72.3 448L52.5 448C42.1 448 34.5 438.2 37 428.1L64 320L37 211.9C34.4 201.8 42.1 192 52.5 192L72.3 192C77.2 192 81.8 194.2 84.8 198L137.6 264L237.3 264L183 101.1C179.6 90.7 187.3 80 198.2 80L241.9 80C250.9 80 259.4 83.8 265.5 90.4L424.7 264L552 264z"/>
+          </svg>
+        </div>
+        <h3 class="category-name">Airlines</h3>
+        <p class="category-description">Transfer to airline partners for flights and upgrades</p>
+      </div>
+
+      <div class="reward-category" data-category="hotels">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 640 640" fill="currentColor">
+            <path d="M80 88C80 74.7 90.7 64 104 64L536 64C549.3 64 560 74.7 560 88C560 101.3 549.3 112 536 112L528 112L528 528L536 528C549.3 528 560 538.7 560 552C560 565.3 549.3 576 536 576L104 576C90.7 576 80 565.3 80 552C80 538.7 90.7 528 104 528L112 528L112 112L104 112C90.7 112 80 101.3 80 88zM288 176L288 208C288 216.8 295.2 224 304 224L336 224C344.8 224 352 216.8 352 208L352 176C352 167.2 344.8 160 336 160L304 160C295.2 160 288 167.2 288 176zM192 160C183.2 160 176 167.2 176 176L176 208C176 216.8 183.2 224 192 224L224 224C232.8 224 240 216.8 240 208L240 176C240 167.2 232.8 160 224 160L192 160zM288 272L288 304C288 312.8 295.2 320 304 320L336 320C344.8 320 352 312.8 352 304L352 272C352 263.2 344.8 256 336 256L304 256C295.2 256 288 263.2 288 272zM416 160C407.2 160 400 167.2 400 176L400 208C400 216.8 407.2 224 416 224L448 224C456.8 224 464 216.8 464 208L464 176C464 167.2 456.8 160 448 160L416 160zM176 272L176 304C176 312.8 183.2 320 192 320L224 320C232.8 320 240 312.8 240 304L240 272C240 263.2 232.8 256 224 256L192 256C183.2 256 176 263.2 176 272zM416 256C407.2 256 400 263.2 400 272L400 304C400 312.8 407.2 320 416 320L448 320C456.8 320 464 312.8 464 304L464 272C464 263.2 456.8 256 448 256L416 256zM352 448L395.8 448C405.7 448 413.3 439 409.8 429.8C396 393.7 361 368 320.1 368C279.2 368 244.2 393.7 230.4 429.8C226.9 439 234.5 448 244.4 448L288.2 448L288.2 528L352.2 528L352.2 448z"/>
+          </svg>
+        </div>
+        <h3 class="category-name">Hotels</h3>
+        <p class="category-description">Book hotel stays and room upgrades</p>
+      </div>
+
+      <div class="reward-category" data-category="cash">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 640 640" fill="currentColor">
+            <path d="M160 128C160 110.3 174.3 96 192 96L456 96C469.3 96 480 106.7 480 120C480 133.3 469.3 144 456 144L379.3 144C397 163.8 409.4 188.6 414 216L456 216C469.3 216 480 226.7 480 240C480 253.3 469.3 264 456 264L414 264C403.6 326.2 353.2 374.9 290.2 382.9L434.6 486C449 496.3 452.3 516.3 442 530.6C431.7 544.9 411.7 548.3 397.4 538L173.4 378C162.1 370 157.3 355.5 161.5 342.2C165.7 328.9 178.1 320 192 320L272 320C307.8 320 338.1 296.5 348.3 264L184 264C170.7 264 160 253.3 160 240C160 226.7 170.7 216 184 216L348.3 216C338.1 183.5 307.8 160 272 160L192 160C174.3 160 160 145.7 160 128z"/>
+          </svg>
+        </div>
+        <h3 class="category-name">Cash</h3>
+        <p class="category-description">Cash back, statement credits, and gift cards</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Reward Programs Selection -->
+  <div id="calculation-section" class="step-section hidden">
+    <div class="step-header">
+      <button id="back-to-categories" class="back-button">← Back to Categories</button>
+      <h2 class="step-title">Step 3: Select Reward Program</h2>
+      <p class="step-description">Choose the specific program for redemption</p>
+    </div>
+    
+    <div class="reward-programs-grid" id="reward-programs-grid">
+      <!-- Reward programs will be dynamically populated -->
+    </div>
+  </div>
+
+  <!-- Step 4: Points Calculator -->
+  <div id="points-calculator" class="step-section hidden">
+    <div class="step-header">
+      <button id="back-to-programs" class="back-button">← Back to Programs</button>
+      <h2 class="step-title">Step 4: Calculate Points Value</h2>
+      <p class="step-description">Enter your points to see their redemption value</p>
+    </div>
+
+    <div class="calculator-container">
+      <div class="selected-program-info">
+        <div class="program-icon" id="calculator-icon">
+          <!-- Category icon will be inserted here -->
+        </div>
+        <div class="program-details">
+          <p class="selected-card-info">
+            <strong>Card:</strong> <span id="selected-card-name">Selected Card</span>
+          </p>
+          <h3 id="selected-program-name" class="selected-program-name">Program Name</h3>
+          <p id="selected-point-name" class="selected-point-name">Point Name</p>
+          <p class="conversion-rate" id="conversion-rate">Rate varies</p>
+        </div>
+      </div>
+
+      <div class="points-input-section">
+        <label class="input-label" for="points-input">Enter your points</label>
+        <div class="input-wrapper">
+          <input 
+            type="number" 
+            id="points-input" 
+            class="points-input" 
+            placeholder="0"
+            min="0"
+            step="1"
+          />
+          <span class="input-suffix">points</span>
+        </div>
+      </div>
+
+      <div class="calculation-result">
+        <div class="result-card">
+          <div class="result-label">Estimated Value</div>
+          <div class="result-value" id="result-value">₹0.00</div>
+          <div class="result-description" id="result-description">Enter points above to see value</div>
+          <div class="result-note">
+            <p>Redemption values are estimates based on typical point valuations. Actual values may vary.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

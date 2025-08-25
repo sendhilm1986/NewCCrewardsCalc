@@ -1,0 +1,113 @@
+<div id="airlines-calculator" class="calculator-container">
+  <!-- Step 1: Credit Card Selection -->
+  <div id="card-selection" class="step-section">
+    <div class="step-header">
+      <h2 class="step-title">Select Your Credit Card</h2>
+      <p class="step-description">Choose your credit card to see airline redemption options</p>
+      
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input 
+            type="text" 
+            id="card-search" 
+            class="search-input" 
+            placeholder="Search credit cards..."
+            autocomplete="off"
+          />
+          <button id="clear-search" class="clear-search hidden">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-grid">
+      <!-- Cards will be dynamically populated -->
+    </div>
+    
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <span id="pagination-info-text">Loading cards...</span>
+      </div>
+      
+      <div class="pagination-controls">
+        <button id="prev-page" class="pagination-btn">← Previous</button>
+        <div class="page-numbers" id="page-numbers"></div>
+        <button id="next-page" class="pagination-btn">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Airline Programs Selection -->
+  <div id="programs-selection" class="step-section hidden">
+    <div class="step-header">
+      <button id="back-to-cards" class="back-button">← Back to Cards</button>
+      <h2 class="step-title">Choose Airline Program</h2>
+      <p class="step-description">Select the airline program for point redemption</p>
+    </div>
+    
+    <div class="programs-grid" id="programs-grid">
+      <!-- Programs will be dynamically populated -->
+    </div>
+  </div>
+
+  <!-- Step 3: Points Calculator -->
+  <div id="points-calculator" class="step-section hidden">
+    <div class="step-header">
+      <button id="back-to-programs" class="back-button">← Back to Programs</button>
+      <h2 class="step-title">Calculate Points Value</h2>
+      <p class="step-description">Enter your points to see their airline redemption value</p>
+    </div>
+
+    <div class="calculator-main">
+      <div class="selected-info">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 640 640" fill="currentColor">
+            <path d="M552 264C582.9 264 608 289.1 608 320C608 350.9 582.9 376 552 376L424.7 376L265.5 549.6C259.4 556.2 250.9 560 241.9 560L198.2 560C187.3 560 179.6 549.3 183 538.9L237.3 376L137.6 376L84.8 442C81.8 445.8 77.2 448 72.3 448L52.5 448C42.1 448 34.5 438.2 37 428.1L64 320L37 211.9C34.4 201.8 42.1 192 52.5 192L72.3 192C77.2 192 81.8 194.2 84.8 198L137.6 264L237.3 264L183 101.1C179.6 90.7 187.3 80 198.2 80L241.9 80C250.9 80 259.4 83.8 265.5 90.4L424.7 264L552 264z"/>
+          </svg>
+        </div>
+        <div class="info-details">
+          <p class="selected-card-info">
+            <strong>Card:</strong> <span id="selected-card-name">Selected Card</span>
+          </p>
+          <h3 id="selected-program-name">Program Name</h3>
+          <p id="selected-point-name">Point Name</p>
+          <p class="conversion-rate" id="conversion-rate">Rate varies</p>
+        </div>
+      </div>
+
+      <div class="points-input-section">
+        <label class="input-label" for="points-input">Enter your points</label>
+        <div class="input-wrapper">
+          <input 
+            type="number" 
+            id="points-input" 
+            class="points-input" 
+            placeholder="0"
+            min="0"
+            step="1"
+          />
+          <span class="input-suffix">points</span>
+        </div>
+      </div>
+
+      <div class="calculation-result">
+        <div class="result-card">
+          <div class="result-label">Estimated Airline Value</div>
+          <div class="result-value" id="result-value">₹0.00</div>
+          <div class="result-description" id="result-description">Enter points above to see value</div>
+          <div class="result-note">
+            <p>Values are estimates for airline redemptions. Actual values may vary based on specific flights and availability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
