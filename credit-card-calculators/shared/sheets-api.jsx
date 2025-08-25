@@ -4,7 +4,7 @@
 
 export class SheetsAPI {
   constructor() {
-    this.apiKey = 'AIzaSyCJo3aOTjiOpKgVVY28FKB6PoGaDefCcD4';
+    this.apiKey = 'YOUR_GOOGLE_SHEETS_API_KEY'; // Replace with your actual API key
     this.spreadsheetId = '1QznZhNzCxeijnnct6n_eauTtHElBlW25c2iQMmWRiUY';
     this.baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
     this.cache = new Map();
@@ -32,7 +32,9 @@ export class SheetsAPI {
       
       if (!response.ok) {
         console.error(`HTTP error! status: ${response.status}, statusText: ${response.statusText}`);
-        throw new Error(`HTTP error! status: ${response.status}`);
+        console.error(`Failed to fetch data from sheet: ${sheetName}`);
+        // Return empty data structure instead of throwing
+        return { creditCards: [], rewardPrograms: [] };
       }
       
       const data = await response.json();
@@ -50,7 +52,8 @@ export class SheetsAPI {
       return processedData;
     } catch (error) {
       console.error(`Error fetching sheet data for ${sheetName}:`, error);
-      throw error;
+      // Return empty data structure instead of throwing
+      return { creditCards: [], rewardPrograms: [] };
     }
   }
 
@@ -183,7 +186,12 @@ export class SheetsAPI {
       };
     } catch (error) {
       console.error('Error fetching all sheet data:', error);
-      throw error;
+      // Return empty data structure for all categories
+      return {
+        airlines: { creditCards: [], rewardPrograms: [] },
+        hotels: { creditCards: [], rewardPrograms: [] },
+        cash: { creditCards: [], rewardPrograms: [] }
+      };
     }
   }
 
@@ -232,7 +240,8 @@ export class SheetsAPI {
       return data.rewardPrograms;
     } catch (error) {
       console.error(`Error getting reward programs for ${category}:`, error);
-      throw error; // Re-throw to let caller handle the error
+      // Return empty array instead of throwing
+      return [];
     }
   }
 
