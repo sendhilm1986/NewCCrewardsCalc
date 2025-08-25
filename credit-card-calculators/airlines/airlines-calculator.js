@@ -38,7 +38,7 @@ class AirlinesCalculator {
         setTimeout(() => reject(new Error('API timeout')), 5000)
       );
       
-      const cardsPromise = this.sheetsAPI.getAllCreditCards();
+      const cardsPromise = this.getCategorySpecificCards();
       
       this.allCards = await Promise.race([cardsPromise, timeoutPromise]);
       
@@ -53,6 +53,15 @@ class AirlinesCalculator {
     }
   }
 
+  async getCategorySpecificCards() {
+    try {
+      const data = await this.sheetsAPI.fetchSheetData('Airlines');
+      return data.creditCards || [];
+    } catch (error) {
+      console.error('Error loading category-specific cards:', error);
+      return [];
+    }
+  }
   getDefaultCards() {
     return [
       { id: 'hdfc-regalia', name: 'Regalia Credit Card', bank: 'HDFC Bank', program: 'hdfc' },
