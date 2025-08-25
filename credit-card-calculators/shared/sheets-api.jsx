@@ -4,7 +4,7 @@
 
 export class SheetsAPI {
   constructor() {
-    this.apiKey = 'YOUR_GOOGLE_SHEETS_API_KEY'; // Replace with your actual API key
+    this.apiKey = 'AIzaSyCJo3aOTjiOpKgVVY28FKB6PoGaDefCcD4'; // Replace with your actual API key
     this.spreadsheetId = '1QznZhNzCxeijnnct6n_eauTtHElBlW25c2iQMmWRiUY';
     this.baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
     this.cache = new Map();
