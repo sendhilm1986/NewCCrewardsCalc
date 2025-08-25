@@ -1,4 +1,4 @@
-import { SheetsAPI } from './sheets-api.jsx'
+import { SheetsAPI } from '../shared/sheets-api.jsx'
 
 class CashCalculator {
   constructor() {

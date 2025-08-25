@@ -1,4 +1,4 @@
-import { SheetsAPI } from './sheets-api.jsx'
+import { SheetsAPI } from './credit-card-calculators/shared/sheets-api.jsx'
 import './style.css'
 
 class App {
