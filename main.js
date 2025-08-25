@@ -363,6 +363,7 @@ class App {
     document.getElementById('card-selection').classList.remove('hidden');
     document.getElementById('category-selection').classList.add('hidden');
     document.getElementById('calculation-section').classList.add('hidden');
+    document.getElementById('points-calculator').classList.add('hidden');
     
     // Reset selections
     document.querySelectorAll('.credit-card-option').forEach(card => {
@@ -375,6 +376,7 @@ class App {
     document.getElementById('card-selection').classList.add('hidden');
     document.getElementById('category-selection').classList.remove('hidden');
     document.getElementById('calculation-section').classList.add('hidden');
+    document.getElementById('points-calculator').classList.add('hidden');
 
     // Update the step description to show selected card
     const cardName = this.selectedCard ? `${this.selectedCard.bank} ${this.selectedCard.name}` : 'Selected Card';
@@ -392,7 +394,7 @@ class App {
     const cardName = this.selectedCard ? `${this.selectedCard.bank} ${this.selectedCard.name}` : 'Selected Card';
     const categoryName = this.getCategoryDisplayName(this.selectedCategory);
     document.querySelector('#calculation-section .step-description').textContent = 
-      `Calculate ${cardName} points value for ${categoryName} redemptions`;
+      `Select ${categoryName} program for ${cardName} points redemption`;
 
     // Show reward programs for the selected category
     this.showRewardPrograms();
@@ -438,8 +440,7 @@ class App {
     
     const selectedCardId = this.selectedCard.id;
     console.log('Filtering programs for card ID:', selectedCardId, 'Card details:', this.selectedCard);
-   console.log('Available programs:', programs.map(p => ({ name: p.name, id: p.id })));
-   
+    console.log('Available programs:', programs.map(p => ({ name: p.name, id: p.id })));
 
     const filteredPrograms = [];
     
@@ -451,15 +452,15 @@ class App {
           selectedCardId
         );
         
-       console.log(`Program ${program.name} - Card ${selectedCardId} - Value: ${conversionValue}`);
+        console.log(`Program ${program.name} - Card ${selectedCardId} - Value: ${conversionValue}`);
         console.log(`Program ${program.name} available cards:`, Object.keys(program.values || {}));
        
         // Only include programs that have a valid conversion value for this card
         if (conversionValue !== null && conversionValue !== undefined && conversionValue > 0) {
           filteredPrograms.push(program);
-         console.log(`✓ Including program: ${program.name}`);
-       } else {
-         console.log(`✗ Excluding program: ${program.name} (no valid conversion value)`);
+          console.log(`✓ Including program: ${program.name}`);
+        } else {
+          console.log(`✗ Excluding program: ${program.name} (no valid conversion value)`);
         }
       } catch (error) {
         console.error('Error checking conversion value for program:', program.name, error);
@@ -471,6 +472,7 @@ class App {
     console.log(`Filtered programs for card ${selectedCardId} in ${this.selectedCategory}:`, filteredPrograms.length);
     return filteredPrograms;
   }
+
   renderRewardPrograms(programs) {
     const rewardProgramsGrid = document.getElementById('reward-programs-grid');
     if (!rewardProgramsGrid) return;
@@ -500,7 +502,7 @@ class App {
           <h3 class="program-name">${program.name}</h3>
           <p class="point-name">${program.pointName}</p>
           <div class="conversion-note">
-            <span class="note-text">Value varies by card</span>
+            <span class="note-text">Value varies by redemption</span>
           </div>
         </div>
       </div>
@@ -636,43 +638,6 @@ class App {
       </svg>`
     };
     return icons[category] || '';
-  }
-
-  getDefaultRewardPrograms(category) {
-    const programsByCategory = {
-      'airlines': [
-        { id: 'chase-transfer', name: 'Chase Ultimate Rewards', pointName: 'Ultimate Rewards Points' },
-        { id: 'amex-transfer', name: 'Amex Membership Rewards', pointName: 'Membership Rewards Points' },
-        { id: 'citi-transfer', name: 'Citi ThankYou Points', pointName: 'ThankYou Points' },
-        { id: 'capital-one-transfer', name: 'Capital One Venture', pointName: 'Venture Miles' }
-      ],
-      'hotels': [
-        { id: 'chase-portal', name: 'Chase Ultimate Rewards', pointName: 'Ultimate Rewards Points' },
-        { id: 'amex-portal', name: 'Amex Membership Rewards', pointName: 'Membership Rewards Points' },
-        { id: 'marriott-nights', name: 'Marriott Bonvoy', pointName: 'Bonvoy Points' },
-        { id: 'hilton-nights', name: 'Hilton Honors', pointName: 'Honors Points' }
-      ],
-      'cash': [
-        { id: 'chase-cash', name: 'Chase Ultimate Rewards', pointName: 'Ultimate Rewards Points' },
-        { id: 'amex-cash', name: 'Amex Membership Rewards', pointName: 'Membership Rewards Points' },
-        { id: 'citi-cash', name: 'Citi ThankYou Points', pointName: 'ThankYou Points' },
-        { id: 'capital-one-cash', name: 'Capital One Venture', pointName: 'Venture Miles' }
-      ]
-    };
-    
-    return programsByCategory[category] || [];
-  }
-
-  getCardDisplayName(cardType) {
-    const cardNames = {
-      'chase': 'Ultimate Rewards',
-      'amex': 'Membership Rewards',
-      'capital-one': 'Venture Miles',
-      'citi': 'ThankYou Points',
-      'marriott': 'Bonvoy Points',
-      'hilton': 'Honors Points'
-    };
-    return cardNames[cardType] || cardType;
   }
 
   getCategoryDisplayName(categoryType) {
