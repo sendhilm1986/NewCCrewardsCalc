@@ -4,57 +4,15 @@
 
 export class SheetsAPI {
   constructor() {
-    this.apiKey = 'AIzaSyCJo3aOTjiOpKgVVY28FKB6PoGaDefCcD4'; // Replace with your actual API key
-    this.spreadsheetId = '1QznZhNzCxeijnnct6n_eauTtHElBlW25c2iQMmWRiUY';
-    this.baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets';
-    this.cache = new Map();
-    this.cacheExpiry = 5 * 60 * 1000; // 5 minutes
+    // Use secure proxy instead of direct API calls
+    this.secureProxy = new window.SecureCalculatorProxy();
   }
 
   /**
    * Fetch data from a specific sheet
    */
   async fetchSheetData(sheetName) {
-    const cacheKey = `sheet_${sheetName}`;
-    const cached = this.cache.get(cacheKey);
-    
-    if (cached && Date.now() - cached.timestamp < this.cacheExpiry) {
-      console.log(`Using cached data for sheet: ${sheetName}`);
-      return cached.data;
-    }
-
-    try {
-      const range = `${sheetName}!A1:Z1000`; // Get all data from A1 to Z1000 to ensure we get all rows
-      const url = `${this.baseUrl}/${this.spreadsheetId}/values/${range}?key=${this.apiKey}`;
-      
-      console.log(`Fetching data from URL: ${url}`);
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        console.error(`HTTP error! status: ${response.status}, statusText: ${response.statusText}`);
-        console.error(`Failed to fetch data from sheet: ${sheetName}`);
-        // Return empty data structure instead of throwing
-        return { creditCards: [], rewardPrograms: [] };
-      }
-      
-      const data = await response.json();
-      console.log(`Raw API response for ${sheetName}:`, data);
-      console.log(`Number of rows received: ${data.values ? data.values.length : 0}`);
-      const processedData = this.processSheetData(data.values || []);
-      
-      // Cache the result
-      this.cache.set(cacheKey, {
-        data: processedData,
-        timestamp: Date.now()
-      });
-      
-      console.log(`Processed data for ${sheetName}:`, processedData);
-      return processedData;
-    } catch (error) {
-      console.error(`Error fetching sheet data for ${sheetName}:`, error);
-      // Return empty data structure instead of throwing
-      return { creditCards: [], rewardPrograms: [] };
-    }
+    return await this.secureProxy.fetchSheetData(sheetName);
   }
 
   /**
